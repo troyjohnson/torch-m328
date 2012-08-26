@@ -1,6 +1,8 @@
 
-#use "make all" to compile the software
-#use "make install" to install the software using an AVR ISP Programmer
+# makefile
+
+# This file assumes you are using a USBTinyISP to program a ATMega328 (NOT the ATMega328P pico-power model)
+#   with the referenced C code.
 
 # Program Variables
 PROGRAM = torch
@@ -33,7 +35,16 @@ DUDE = avrdude
 SUDO = sudo
 
 # Make Targets
+
 all: ${HEX}
+
+help:
+	@echo " "
+	@echo "Make targets for \"${PROGRAM}\": "
+	@echo "  all		build binary"
+	@echo "  install	install binary"
+	@echo "  clean		clean build files"
+	@echo " "
 
 ${HEX}: ${ELF}
 	${OBJCOPY} -j .text -j .data -O ihex ${ELF} ${HEX}
