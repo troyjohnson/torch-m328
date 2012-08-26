@@ -3,16 +3,6 @@
 #include <avr/eeprom.h>
 #include <util/delay.h>
 
-#define shortdelay();	asm("nop\n\t" \
-"nop\n\t");
-
-//uint16_t eepromWord __attribute__((section(".eeprom")));
-
-/* Assumptions:
- * 	- LED connected to PORTB
- * 	- F_CPU is defined to be your cpu speed (preprocessor define)
- */
-
 #define OFF 0x00
 #define L0 0x01
 #define L1 0x02
@@ -82,5 +72,4 @@ int main (void)
 	}
 	return 0;
 }
-
 
