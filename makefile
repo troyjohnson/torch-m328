@@ -18,6 +18,7 @@ PORT = usb
 # Part Variables
 MCU_TARGET = atmega328
 AVRDUDE_TARGET = m328
+DF_CPU = 9600000
 
 # Compiler Variables
 OPTIMIZE = -Os
@@ -50,11 +51,11 @@ ${HEX}: ${ELF}
 	${OBJCOPY} -j .text -j .data -O ihex ${ELF} ${HEX}
 
 ${ELF}: ${OBJ}
-	${CC} -g -DF_CPU=9600000 -Wall -Os -mmcu=${MCU_TARGET} -o ${ELF} ${OBJ}
+	${CC} -g -DF_CPU=${DF_CPU} -Wall -Os -mmcu=${MCU_TARGET} -o ${ELF} ${OBJ}
 	${SIZE} ${ELF}
 
 ${OBJ}: ${SRC}
-	${CC} -g -DF_CPU=9600000 -Wall -Os -mmcu=${MCU_TARGET} -c -o ${OBJ} ${SRC}
+	${CC} -g -DF_CPU=${DF_CPU} -Wall -Os -mmcu=${MCU_TARGET} -c -o ${OBJ} ${SRC}
 
 clean:
 	rm -f ${OBJ} ${ELF} ${HEX}
